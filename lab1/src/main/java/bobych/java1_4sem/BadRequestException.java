@@ -1,6 +1,6 @@
 package bobych.java1_4sem;
 
-public class excepetion {
+public class BadRequestException {
     static public int isValueA(String a) {
         double doubleA;
         try {

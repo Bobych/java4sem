@@ -15,7 +15,7 @@ public class controller {
     public ResponseEntity<Object> counting(@RequestParam(value="A", required=true) String a,
                                @RequestParam(value="B", required=true) String b,
                                @RequestParam(value="C", required=true) String c){
-        int handlingValue = excepetion.isValueA(a);
+        int handlingValue = BadRequestException.isValueA(a);
         if (handlingValue == -1) {
             return new ResponseEntity<>("A value is not number!", HttpStatus.BAD_REQUEST);
         }
@@ -23,7 +23,7 @@ public class controller {
             return new ResponseEntity<>("A value is less or equals then 0!", HttpStatus.BAD_REQUEST);
         }
 
-        handlingValue = excepetion.isValueB(b);
+        handlingValue = BadRequestException.isValueB(b);
         if (handlingValue == -1) {
             return new ResponseEntity<>("B value is not number!", HttpStatus.BAD_REQUEST);
         }
@@ -31,7 +31,7 @@ public class controller {
             return new ResponseEntity<>("B value is less or equals then 0!", HttpStatus.BAD_REQUEST);
         }
 
-        handlingValue = excepetion.isValueB(c);
+        handlingValue = BadRequestException.isValueB(c);
         if (handlingValue == -1) {
             return new ResponseEntity<>("C value is not number!", HttpStatus.BAD_REQUEST);
         }
@@ -39,7 +39,7 @@ public class controller {
             return new ResponseEntity<>("C value is less or equals then 0!", HttpStatus.BAD_REQUEST);
         }
 
-        handlingValue = excepetion.isExist(a, b, c);
+        handlingValue = BadRequestException.isExist(a, b, c);
         if(handlingValue == -1){
             return new ResponseEntity<>("Triangle is not exists!", HttpStatus.BAD_REQUEST);
         }
