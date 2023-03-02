@@ -1,6 +1,8 @@
 package bobych.java1_4sem;
 
 import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,9 +12,38 @@ public class controller {
     private final AtomicLong counter = new AtomicLong();
 
     @RequestMapping("/counting")
-    public triangle counting(@RequestParam(value="A", required=true) double a,
-                               @RequestParam(value="B", required=true) double b,
-                               @RequestParam(value="C", required=true) double c){
-        return new triangle(a, b, c);
+    public ResponseEntity<Object> counting(@RequestParam(value="A", required=true) String a,
+                               @RequestParam(value="B", required=true) String b,
+                               @RequestParam(value="C", required=true) String c){
+        int handlingValue = excepetion.isValueA(a);
+        if (handlingValue == -1) {
+            return new ResponseEntity<>("A value is not number!", HttpStatus.BAD_REQUEST);
+        }
+        else if (handlingValue == -2) {
+            return new ResponseEntity<>("A value is less or equals then 0!", HttpStatus.BAD_REQUEST);
+        }
+
+        handlingValue = excepetion.isValueB(b);
+        if (handlingValue == -1) {
+            return new ResponseEntity<>("B value is not number!", HttpStatus.BAD_REQUEST);
+        }
+        else if (handlingValue == -2) {
+            return new ResponseEntity<>("B value is less or equals then 0!", HttpStatus.BAD_REQUEST);
+        }
+
+        handlingValue = excepetion.isValueB(c);
+        if (handlingValue == -1) {
+            return new ResponseEntity<>("C value is not number!", HttpStatus.BAD_REQUEST);
+        }
+        else if (handlingValue == -2) {
+            return new ResponseEntity<>("C value is less or equals then 0!", HttpStatus.BAD_REQUEST);
+        }
+
+        handlingValue = excepetion.isExist(a, b, c);
+        if(handlingValue == -1){
+            return new ResponseEntity<>("Triangle is not exists!", HttpStatus.BAD_REQUEST);
+        }
+
+        return  new ResponseEntity<>(new triangle(Double.parseDouble(a), Double.parseDouble(b), Double.parseDouble(c)), HttpStatus.OK);
     }
 }
